@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 
 bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('bb.'))
-bot.extensions = ('modules.antilink')
+bot.extensions = ('modules.antilink', 'modules.pingmodule')
 
 @bot.command()
 async def ping(ctx):
