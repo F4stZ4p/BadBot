@@ -2,17 +2,18 @@ import discord
 import os
 from discord.ext import commands
 
-bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('bb.'))
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send('Pong!')
+class BadBot(commands.AutoShardedBot):
+    def __init__(self):
+        self.extensions = ('modules.pingmodule', 'modules.antilink')
+        super().__init__(command_prefix=commands.when_mentioned_or('bb.'), case_insensitive=True)
+        
+    def run(self):
+        for extension in self.extensions:
+            try:
+                self.load_extension(extension)
+            except Exception as e:
+                print(f'Something went wrong while loading extension {extension}: {e}')
+        super().run(os.getenv('TOKEN'))
 
 if __name__ == "__main__":
-    try:
-        bot.load_extension('modules.antilink')
-        bot.load_extension('modules.pingmodule')
-    except Exception as e:
-        print(e)
-
-bot.run(os.getenv('TOKEN'))
+    BadBot().run()
