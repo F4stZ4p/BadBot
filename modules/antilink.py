@@ -11,3 +11,4 @@ class Antilink():
 
 def setup(bot):
     bot.add_cog(Antilink(bot))
+    print('Antilink loaded')
