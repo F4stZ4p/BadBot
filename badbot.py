@@ -5,10 +5,9 @@ from discord.ext import commands
 class BadBot(commands.AutoShardedBot):
     def __init__(self):
         super().__init__(command_prefix=commands.when_mentioned_or('bb.'), case_insensitive=True)
-        self.extensions = ['modules.pingmodule', 'modules.antilink']
         
     def run(self):
-        for extension in self.extensions:
+        for extension in ['modules.pingmodule', 'modules.antilink']:
             try:
                 self.load_extension(extension)
             except Exception as e:
