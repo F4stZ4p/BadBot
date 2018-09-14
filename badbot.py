@@ -7,7 +7,9 @@ class BadBot(commands.AutoShardedBot):
         super().__init__(command_prefix=commands.when_mentioned_or('bb.'), case_insensitive=True)
      
     async def on_message(self, message):
-        return not message.author.bot
+        if message.author.bot:
+            return
+        await self.process_commands(message)
         
     def run(self):
         for extension in ['modules.pingmodule', 'modules.antilink']:
