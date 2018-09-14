@@ -8,7 +8,6 @@ class BadBot(commands.AutoShardedBot):
      
     async def on_message(self, message):
         return not message.author.bot
-        await self.process_commands(message)
         
     def run(self):
         for extension in ['modules.pingmodule', 'modules.antilink']:
