@@ -7,7 +7,7 @@ class BadBot(commands.AutoShardedBot):
         super().__init__(command_prefix=commands.when_mentioned_or('bb.'), case_insensitive=True)
      
     async def on_message(self, message):
-        return not ctx.author.bot
+        return not message.author.bot
         await self.process_commands(message)
         
     def run(self):
