@@ -5,6 +5,9 @@ from discord.ext import commands
 class BadBot(commands.AutoShardedBot):
     def __init__(self):
         super().__init__(command_prefix=commands.when_mentioned_or('bb.'), case_insensitive=True)
+     
+    async def on_message(self, message):
+        return not message.author.bot:
         
     def run(self):
         for extension in ['modules.pingmodule', 'modules.antilink']:
