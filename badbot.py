@@ -3,7 +3,6 @@ import os
 from discord.ext import commands
 
 bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or('bb.'))
-bot.extensions = ('modules.antilink', 'modules.pingmodule')
 
 @bot.command()
 async def ping(ctx):
@@ -12,8 +11,8 @@ async def ping(ctx):
 if __name__ == "__main__":
     for extension in bot.extensions:
         try:
-            bot.load_extension(extension)
-            print(f'{extension} loaded!')
+            bot.load_extension('modules.antilink')
+            bot.load_extension('modules.pingmodule')
         except Exception as e:
             print(e)
 
