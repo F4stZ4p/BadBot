@@ -6,10 +6,12 @@ class Antilink():
         self.bot = bot
         
     async def __delete_link(self, message):
+        if not message.channel:
+            pass
         if message.content.startswith('https') or message.content.startswith('http') or message.content.startswith('discord.gg') or message.content.startswith('www'):
             try:
                 await message.delete()
-                await ctx.send(f':link: | **{message.author.mention}, no links allowed here!**', delete_after=5)
+                await message.channel.send(f':link: | **{message.author.mention}, no links allowed here!**', delete_after=5)
             except:
                 pass
 
