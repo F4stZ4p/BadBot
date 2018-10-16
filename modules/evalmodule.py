@@ -11,7 +11,7 @@ class EvalModule():
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
         
-    async def _process_code(self, code: str, channel: discord.Channel):
+    async def _process_code(self, code: str, channel: discord.channel):
         """Code processor"""
         if code.startswith('```') and code.endswith('```'):
             await channel.send((await self.evaluate_code(self.cleanup_code(code))))
