@@ -36,7 +36,8 @@ class EvalModule():
                     return "Output too long"
                     
     async def on_message(self, message):
-        await self._process_code(message.clean_content)
+        await self._process_code(message.content)
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
+    print('EvalModule loaded.')
