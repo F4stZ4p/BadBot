@@ -39,8 +39,12 @@ class EvalModule():
                     
     async def on_message(self, message):
         """Processing our messages"""
-        if not message.author.bot or message.author != self.bot.user:
-            await self._process_code(message.clean_content, message.channel)
+        if message.author.bot:
+            return
+        if message.author != self.bot.user:
+            return
+        
+        await self._process_code(message.clean_content, message.channel)
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
