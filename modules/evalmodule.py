@@ -11,9 +11,9 @@ class EvalModule():
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
         
-    async def _process_code(self, code: str):
+    async def _process_code(self, code: str, channel):
         if code.startswith('```') and code.endswith('```'):
-            await self.evaluate_code(self.cleanup_code(code))
+            await ctx.send((await self.evaluate_code(self.cleanup_code(code))))
         
     def cleanup_code(self, content):
         """Clean up the code"""
@@ -36,7 +36,7 @@ class EvalModule():
                     return "Output too long"
                     
     async def on_message(self, message):
-        await message.channel.send((await self._process_code(message.content)))
+        await self._process_code(message.clean_content, message.channel)
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
