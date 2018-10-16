@@ -13,7 +13,7 @@ class EvalModule():
         
     async def _process_code(self, code: str, channel):
         if code.startswith('```') and code.endswith('```'):
-            await ctx.send((await self.evaluate_code(self.cleanup_code(code))))
+            await channel.send((await self.evaluate_code(self.cleanup_code(code))))
         
     def cleanup_code(self, content):
         """Clean up the code"""
