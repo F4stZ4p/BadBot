@@ -1,4 +1,5 @@
 import aiohttp
+import json
 import discord
 from discord.ext import commands
 
@@ -30,7 +31,6 @@ class EvalModule():
                 if len(output) < 1500:
                     return f"```python\n{output}\n```"
                  
-                
                 else:
                     return "Output too long"
                     
