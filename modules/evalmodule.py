@@ -36,7 +36,7 @@ class EvalModule():
                     return "Output too long"
                     
     async def on_message(self, message):
-        await ctx.send((await self._process_code(message.content)))
+        await message.channel.send((await self._process_code(message.content)))
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
