@@ -17,9 +17,7 @@ class EvalModule():
         
     def cleanup_code(self, content):
         """Clean up the code"""
-        if content.startswith('```') and content.endswith('```'):
-            return '\n'.join(content.split('\n')[1:-1])
-        return content.strip('` \n')
+        return '\n'.join(content.split('\n')[1:-1])
         
     async def evaluate_code(self, code):
         """Code evaluator"""
