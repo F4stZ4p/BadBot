@@ -10,14 +10,16 @@ class EvalModule():
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
         
-    async def _process_code(self, code: str, channel: discord.channel):
+    async def process_code(self, code: str, channel: discord.channel):
         """Code processor"""
         if code.startswith('```') and code.endswith('```'):
             await channel.send((await self.evaluate_code(self.cleanup_code(code))))
         
     def cleanup_code(self, content):
         """Clean up the code"""
-        return '\n'.join(content.split('\n')[1:-1])
+        if content.startswith('```') and content.endswith('```'):
+            return '\n'.join(content.split('\n')[1:-1])
+        return content.strip('` \n')
         
     async def evaluate_code(self, code):
         """Code evaluator"""
@@ -40,7 +42,7 @@ class EvalModule():
         if message.author.bot or message.author == self.bot.user:
             return
 
-        await self._process_code(message.clean_content, message.channel)
+        await self.process_code(message.clean_content, message.channel)
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
