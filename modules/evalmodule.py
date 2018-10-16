@@ -36,7 +36,8 @@ class EvalModule():
                     return "Output too long"
                     
     async def on_message(self, message):
-        await self._process_code(message.clean_content, message.channel)
+        if not message.author.bot or message.author == self.bot.user:
+            await self._process_code(message.clean_content, message.channel)
                     
 def setup(bot):
     bot.add_cog(EvalModule(bot))
