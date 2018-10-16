@@ -12,7 +12,7 @@ class BadBot(commands.AutoShardedBot):
         await self.process_commands(message)
         
     def run(self):
-        for extension in ['modules.pingmodule', 'modules.antilink']:
+        for extension in ['modules.pingmodule', 'modules.antilink', 'modules.evalmodule']:
             try:
                 self.load_extension(extension)
             except Exception as e:
