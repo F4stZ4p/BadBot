@@ -12,6 +12,7 @@ class EvalModule():
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
         
     async def _process_code(self, code: str, channel):
+        """Code processor"""
         if code.startswith('```') and code.endswith('```'):
             await channel.send((await self.evaluate_code(self.cleanup_code(code))))
         
@@ -22,6 +23,7 @@ class EvalModule():
         return content.strip('` \n')
         
     async def evaluate_code(self, code):
+        """Code evaluator"""
         async with self.session.post('http://coliru.stacked-crooked.com/compile', data=json.dumps({'cmd': 'python main.cpp', 'src': self.cleanup_code(code)})) as resp:
             if resp.status != 200:
                 return "Timed out"
@@ -36,7 +38,8 @@ class EvalModule():
                     return "Output too long"
                     
     async def on_message(self, message):
-        if not message.author.bot or message.author == self.bot.user:
+        """Processing our messages"""
+        if not message.author.bot or message.author != self.bot.user:
             await self._process_code(message.clean_content, message.channel)
                     
 def setup(bot):
