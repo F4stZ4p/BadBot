@@ -1,14 +1,14 @@
-import aiohttp
-import json
 import discord
+from json import dumps
 from discord.ext import commands
+from aiohttp import ClientSession
 
 class EvalModule():
     """The best module ever to evaluate code"""
 
     def __init__(self, bot):
         self.bot = bot
-        self.session = aiohttp.ClientSession(loop=self.bot.loop)
+        self.session = ClientSession(loop=self.bot.loop)
         
     async def process_code(self, message: discord.message):
         """Code processor"""
@@ -24,7 +24,7 @@ class EvalModule():
         
     async def evaluate_code(self, code):
         """Code evaluator"""
-        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=json.dumps({'cmd': 'python main.cpp', 'src': self.cleanup_code(code)})) as resp:
+        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python main.cpp', 'src': self.cleanup_code(code)})) as resp:
             if resp.status != 200:
                 return "Timed out"
 
