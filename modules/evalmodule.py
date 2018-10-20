@@ -33,6 +33,7 @@ class MessageAuthor():
         self._name = '{ctx.author.name}'
         self._display_name = '{ctx.author.display_name}'
         self._avatar_url = '{ctx.author.avatar_url}'
+        self._roles = {ctx.author.roles}
         
     @property
     def id(self):
@@ -53,6 +54,10 @@ class MessageAuthor():
     @property
     def avatar_url(self):
         return self._avatar_url
+        
+    @property
+    def roles(self):
+        return self._roles
 
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
