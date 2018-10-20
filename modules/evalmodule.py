@@ -30,7 +30,12 @@ class Context():
         self.discriminator = {ctx.author.discriminator}
     def __repr__(self):
         return 'Context Object'
-
+    def __doc__(self):
+        return '''
+A discord.py like Context object, but a bit cutted
+    --> self.message_id | Message ID in which command was invoked
+    --> self.author_discriminator | Command invoker discriminator (w/o #)
+               '''
 ctx = Context()
 {self.cleanup_code(code)}
                 """
