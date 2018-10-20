@@ -30,8 +30,8 @@ class MessageAuthor():
         self.name = '{ctx.author.name}'
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
-    def __setattr__(self, name, value):
-        raise RuntimeError("Can't set an attribute")
+
+
 
 class Context():
     def __init__(self):
@@ -39,7 +39,7 @@ class Context():
     def __repr__(self):
         return 'Context Object'
     def __setattr__(self, name, value):
-        raise RuntimeError("Can't set an attribute")
+
 
 ctx = Context()
 {self.cleanup_code(code)}
