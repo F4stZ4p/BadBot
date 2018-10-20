@@ -26,9 +26,9 @@ class EvalModule():
         return f"""
 class Context():
     def __init__(self):
-        self.author = {ctx.author}
+        self.author = '{ctx.author.name}#{ctx.author.discriminator}'
     def __repr__(self):
-        return {ctx}
+        return 'Context Object'
 
 ctx = Context()
 {self.cleanup_code(code)}
