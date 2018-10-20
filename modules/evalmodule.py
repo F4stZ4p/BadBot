@@ -24,7 +24,7 @@ class EvalModule():
     
     def do_code(self, code, ctx):
         return f"""
-ctx = {str(ctx)}
+ctx = 'Context Object:\n-> ctx.author'
 ctx.author = {str(ctx.author)}
 {self.cleanup_code(code)}
                 """
