@@ -33,7 +33,7 @@ class MessageAuthor():
         self._name = '{ctx.author.name}'
         self._display_name = '{ctx.author.display_name}'
         self._avatar_url = '{ctx.author.avatar_url}'
-        self._roles = {ctx.author.roles}
+        self._roles = [{ctx.author.roles}]
         
     @property
     def id(self):
