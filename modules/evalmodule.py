@@ -29,7 +29,7 @@ ctx = '''
         -> ctx.author
         -> ctx.prefix
       '''
-ctx.author = f'{ctx.author}'
+ctx.author = '{ctx.author}'
 {self.cleanup_code(code)}
                 """
         
