@@ -24,12 +24,13 @@ class EvalModule():
     
     def do_code(self, code, ctx):
         return f"""
-ctx = '''
-      Context Object:
-        -> ctx.author
-        -> ctx.prefix
-      '''
-ctx.author = '{ctx.author}'
+class Context():
+    def __init__(self):
+        self.author = {ctx.author}
+    def __repr__(self):
+        return {ctx}
+
+ctx = Context()
 {self.cleanup_code(code)}
                 """
         
