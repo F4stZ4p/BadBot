@@ -27,14 +27,18 @@ class EvalModule():
 class MessageAuthor():
     def __init__(self):
         self.id = {ctx.author.id}
+        self.bot = bool({ctx.author.bot})
         self.name = '{ctx.author.name}'
         self.display_name = '{ctx.author.display_name}'
+        self.avatar_url = '{ctx.author.avatar_url}'
+
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
 
 class Context():
     def __init__(self):
         self.author = MessageAuthor()
+
     def __repr__(self):
         return 'Context Object'
 
