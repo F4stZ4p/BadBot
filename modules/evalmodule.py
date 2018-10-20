@@ -25,6 +25,23 @@ class EvalModule():
     def do_code(self, code, ctx):
         """Does Context tricky stuff"""
         return f"""
+class DiscordRoleAdaptor():
+    def __init__(self, **kwargs):
+        self._role = kwargs.pop('role')
+        self._position = kwargs.pop('position')
+        self._color = kwargs.pop('color')
+        
+    @property
+    def position(self):
+        return self._position
+        
+    @property
+    def color(self):
+        return self._color
+        
+    def __repr__(self):
+        return self._role
+
 class MessageAuthor():
     def __init__(self):
 
@@ -33,7 +50,8 @@ class MessageAuthor():
         self._name = '{ctx.author.name}'
         self._display_name = '{ctx.author.display_name}'
         self._avatar_url = '{ctx.author.avatar_url}'
-        self._roles = [{ctx.author.roles}]
+        
+        self._roles = []
         
     @property
     def id(self):
