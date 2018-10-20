@@ -28,18 +28,15 @@ class MessageAuthor():
     def __init__(self):
         self.id = {ctx.author.id}
         self.name = '{ctx.author.name}'
+        self.display_name = '{ctx.author.dipslay_name}'
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
-
-
 
 class Context():
     def __init__(self):
         self.author = MessageAuthor()
     def __repr__(self):
         return 'Context Object'
-    def __setattr__(self, name, value):
-
 
 ctx = Context()
 {self.cleanup_code(code)}
