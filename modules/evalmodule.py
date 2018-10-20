@@ -13,7 +13,7 @@ class EvalModule():
     async def process_code(self, message: discord.message):
         """Code processor"""
         if message.clean_content.startswith('```') and message.clean_content.endswith('```'):
-            await message.channel.send((await self.evaluate_code(self.cleanup_code(message.clean_content))))
+            await message.channel.send((await self.evaluate_code(self.cleanup_code(message.clean_content), message)))
             await message.add_reaction('Ok:501773759011749898')
         
     def cleanup_code(self, content):
@@ -21,10 +21,16 @@ class EvalModule():
         if content.startswith('```') and content.endswith('```'):
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
+    
+    def do_code(self, code, ctx):
+        return f"""
+{ctx} = {ctx}
+{self.cleanup_code(code)}
+                """
         
-    async def evaluate_code(self, code):
+    async def evaluate_code(self, code, ctx):
         """Code evaluator"""
-        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python main.cpp', 'src': self.cleanup_code(code)})) as resp:
+        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python main.cpp', 'src': self.do_code(code, ctx)})) as resp:
             if resp.status != 200:
                 return "Timed out"
 
