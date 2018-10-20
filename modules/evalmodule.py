@@ -39,7 +39,7 @@ ctx = Context()
         """Code evaluator"""
         async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python3 main.cpp', 'src': self.do_code(code, ctx)})) as resp:
             if resp.status != 200:
-                return "Timed out"
+                return f"Unable to process request due to {resp.status} error"
 
             else:
                 output = await resp.text(encoding='utf-8')
