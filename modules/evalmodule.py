@@ -38,7 +38,7 @@ class Context():
         self.author = MessageAuthor()
     def __repr__(self):
         return 'Context Object'
-    def __setattr__(self, name, value)
+    def __setattr__(self, name, value):
         raise RuntimeError("Can't set an attribute")
 
 ctx = Context()
