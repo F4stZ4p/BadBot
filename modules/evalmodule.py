@@ -26,7 +26,7 @@ class EvalModule():
         return f"""
 class Context():
     def __init__(self):
-        self.prefix = {ctx.prefix}
+        self.bot = {ctx.me.name}
         self.discriminator = {ctx.author.discriminator}
     def __repr__(self):
         return 'Context Object'
