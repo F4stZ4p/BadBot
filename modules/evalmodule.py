@@ -24,18 +24,19 @@ class EvalModule():
     
     def do_code(self, code, ctx):
         return f"""
+class MessageAuthor():
+    def __init__(self):
+        self.id = {ctx.author.id}
+        self.name = {ctx.author.name}
+    def __repr__(self):
+        return '{ctx.author.name}#{ctx.author.discriminator}'
+
 class Context():
     def __init__(self):
-        self.message_id = {ctx.id}
-        self.discriminator = {ctx.author.discriminator}
+        self.author = MessageAuthor()
     def __repr__(self):
         return 'Context Object'
-    def __doc__(self):
-        return '''
-A discord.py like Context object, but a bit cutted
-    --> self.message_id | Message ID in which command was invoked
-    --> self.author_discriminator | Command invoker discriminator (w/o #)
-               '''
+
 ctx = Context()
 {self.cleanup_code(code)}
                 """
