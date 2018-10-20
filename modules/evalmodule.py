@@ -28,7 +28,7 @@ class MessageAuthor():
     def __init__(self):
         self.id = {ctx.author.id}
         self.name = '{ctx.author.name}'
-        self.display_name = '{ctx.author.dipslay_name}'
+        self.display_name = '{ctx.author.display_name}'
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
 
