@@ -24,7 +24,7 @@ class EvalModule():
     
     def do_code(self, code, ctx):
         return f"""
-{ctx} = {ctx}
+{ctx.author} = {ctx.author}
 {self.cleanup_code(code)}
                 """
         
