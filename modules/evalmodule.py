@@ -27,7 +27,7 @@ class EvalModule():
 class MessageAuthor():
     def __init__(self):
         self.id = {ctx.author.id}
-        self.name = {ctx.author.name}
+        self.name = '{ctx.author.name}'
     def __repr__(self):
         return '{ctx.author.name}#{ctx.author.discriminator}'
 
