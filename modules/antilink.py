@@ -8,6 +8,8 @@ class Antilink():
     async def __delete_link(self, message):
         if not message.channel:
             pass
+        if message.author == self.bot.user:
+            pass
         if message.content.startswith('https') or message.content.startswith('http') or message.content.startswith('discord.gg') or message.content.startswith('www'):
             try:
                 await message.delete()
