@@ -26,10 +26,10 @@ class Community():
 
         src = object.callback.__code__
         lines, firstlineno = inspect.getsourcelines(src)
-        if not obj.callback.__module__.startswith('discord'):
+        if not object.callback.__module__.startswith('discord'):
             location = os.path.relpath(src.co_filename).replace('\\', '/')
         else:
-            location = obj.callback.__module__.replace('.', '/') + '.py'
+            location = object.callback.__module__.replace('.', '/') + '.py'
 
         await ctx.send(f'<{self.source_url}/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>')
         
