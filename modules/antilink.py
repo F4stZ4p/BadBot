@@ -5,11 +5,11 @@ class Antilink():
     def __init__(self, bot):
         self.bot = bot
         
-    async def __delete_link(self, message):
+    async def delete_link(self, message):
         if not message.channel:
-            pass
+            return
         if message.author == self.bot.user:
-            pass
+            return
         if message.content.startswith('https') or message.content.startswith('http') or message.content.startswith('discord.gg') or message.content.startswith('www'):
             try:
                 await message.delete()
@@ -18,7 +18,7 @@ class Antilink():
                 pass
 
     async def on_message(self, message):
-        await self.__delete_link(message)
+        await self.delete_link(message)
 
 def setup(bot):
     bot.add_cog(Antilink(bot))
