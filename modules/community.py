@@ -31,7 +31,7 @@ class Community():
         else:
             location = object.callback.__module__.replace('.', '/') + '.py'
 
-        await ctx.send(f'<{self.source_url}/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>')
+        await ctx.send(f'<{self.source_url}/blob/master/{location}#L{firstlineno}-L{firstlineno + len(lines) - 1}>')
         
 def setup(bot):
     bot.add_cog(Community(bot))
