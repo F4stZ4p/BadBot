@@ -22,55 +22,9 @@ class EvalModule():
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
     
-    def do_code(self, code, ctx):
-        """Does Context tricky stuff"""
-        return f"""
-class MessageAuthor():
-    def __init__(self):
-
-        self._id = {ctx.author.id}
-        self._bot = {ctx.author.bot}
-        self._name = '{ctx.author.name}'
-        self._display_name = '{ctx.author.display_name}'
-        self._avatar_url = '{ctx.author.avatar_url}'
-        
-    @property
-    def id(self):
-        return self._id
-        
-    @property
-    def bot(self):
-        return self._bot
-        
-    @property
-    def name(self):
-        return self._name
-        
-    @property
-    def display_name(self):
-        return self._display_name
-        
-    @property
-    def avatar_url(self):
-        return self._avatar_url
-
-    def __repr__(self):
-        return '{ctx.author.name}#{ctx.author.discriminator}'
-
-class Context():
-    def __init__(self):
-        self.author = MessageAuthor()
-
-    def __repr__(self):
-        return 'Context Object'
-
-ctx = Context()
-{self.cleanup_code(code)}
-                """
-        
     async def evaluate_code(self, code, ctx):
         """Code evaluator"""
-        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python3 main.cpp', 'src': self.do_code(code, ctx)})) as resp:
+        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python3 main.cpp', 'src': self.cleanup_code(code)})) as resp:
             if resp.status != 200:
                 return f"Unable to process request due to {resp.status} error"
 
