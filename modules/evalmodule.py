@@ -13,7 +13,7 @@ class EvalModule():
     async def process_code(self, message: discord.message):
         """Code processor"""
         if message.clean_content.startswith('```') and message.clean_content.endswith('```'):
-            await message.channel.send((await self.evaluate_code(self.cleanup_code(message.clean_content), message)))
+            await message.channel.send((await self.evaluate_code(self.cleanup_code(message.clean_content))))
             await message.add_reaction('Ok:501773759011749898')
         
     def cleanup_code(self, content):
@@ -22,9 +22,9 @@ class EvalModule():
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
     
-    async def evaluate_code(self, code, ctx):
+    async def evaluate_code(self, code):
         """Code evaluator"""
-        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python3 main.cpp', 'src': self.cleanup_code(code)})) as resp:
+        async with self.session.post('http://coliru.stacked-crooked.com/compile', data=dumps({'cmd': 'python3 main.cpp', 'src': code})) as resp:
             if resp.status != 200:
                 return f"Unable to process request due to {resp.status} error"
 
