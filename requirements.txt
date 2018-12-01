@@ -1,2 +1,4 @@
 git+https://github.com/Rapptz/discord.py@rewrite
 git+https://github.com/F4stZ4p/jishaku@master#egg=jishaku
+psutil
+humanize
